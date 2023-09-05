@@ -3,13 +3,12 @@ import { Text } from 'react-native'
 import { styles } from '../theme/appTheme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePokemonPaginate } from '../hooks/usePokemonPaginate';
+import { FadeInImage } from '../components/FadeInImage';
 
 export const HomeScreen = () => {
 
   const { top } = useSafeAreaInsets();
   const { simplePokemonLst, loadPokemons } = usePokemonPaginate();
-
-  console.log(simplePokemonLst);
   
   return (
     <>
@@ -24,13 +23,15 @@ export const HomeScreen = () => {
          }}>
           Pokédex
         </Text>
-
-        <FlatList //-- ESTE COMPONENTE SE ENCARGA DE HACERLE UN LAZYLOAD A LAS PETICIONES
+        {/* ESTE COMPONENTE SE ENCARGA DE HACERLE UN LAZYLOAD A LAS PETICIONES */}
+        <FlatList 
+          numColumns={ 2 }
+          showsVerticalScrollIndicator={ false }
           data={ simplePokemonLst }
           keyExtractor={ ( pokemon ) => pokemon.id } 
-          renderItem={({ item }) =>(
-            <Image
-              source={{  uri: item.picture }}
+          renderItem={({ item }) => (
+            <FadeInImage
+              uri={ item.picture }
               style={{ 
                 width: 100,
                 height: 100
@@ -43,7 +44,7 @@ export const HomeScreen = () => {
 
           ListFooterComponent={
             <ActivityIndicator 
-              style={{ height: 100}}
+              style={{ height: 100 }}
               size={ 20 }
               color="#474CB0"
             />
