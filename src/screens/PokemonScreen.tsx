@@ -1,13 +1,14 @@
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParams } from "../navigator/navigator";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { FadeInImage } from "../components/FadeInImage";
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'>{};
 
 export const PokemonScreen = ( { navigation, route }: Props) => {
   const { simplePokemon, color } = route.params;  
-  const { name, id } = simplePokemon;
+  const { name, id, picture } = simplePokemon;
   const { top } = useSafeAreaInsets();
 
   return (
@@ -37,6 +38,17 @@ export const PokemonScreen = ( { navigation, route }: Props) => {
         >
           { name  + '\n'} # { id }
         </Text>
+
+        {/* Pokebola blanca */}
+        <Image 
+          style={ styles.pokeball }
+          source={ require('../assets/pokebola-blanca.png')}
+        />
+
+        <FadeInImage
+          uri={ picture }
+          style={ styles.pokemonImage }
+        />
       </View>
     </View>
   );
@@ -59,5 +71,17 @@ const styles = StyleSheet.create({
     fontSize: 40,
     alignSelf: 'flex-start',
     left: 20
+  },
+  pokeball:{
+    width: 250,
+    height:250,
+    bottom: -20,
+    opacity: 0.7
+  },
+  pokemonImage:{
+    width: 250,
+    height: 250,
+    position: 'absolute',
+    bottom:-15
   }
 })
