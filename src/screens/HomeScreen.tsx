@@ -3,7 +3,6 @@ import { Text } from 'react-native'
 import { styles } from '../theme/appTheme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePokemonPaginate } from '../hooks/usePokemonPaginate';
-import { FadeInImage } from '../components/FadeInImage';
 import { PokemonCard } from '../components/PokemonCard';
 
 export const HomeScreen = () => {
@@ -41,7 +40,7 @@ export const HomeScreen = () => {
           onEndReached={loadPokemons}
           onEndReachedThreshold={0.2}
           ListFooterComponent={
-            <ActivityIndicator style={{height: 100}} size={20} color="#474CB0" />
+            <ActivityIndicator style={{height: 100}} size={20} color="#474CB0" /> //--loading de carga
           }
         />
       </View>
